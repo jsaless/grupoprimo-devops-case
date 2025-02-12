@@ -1,0 +1,6 @@
+name: devops-ecs-stack
+description: A minimal AWS TypeScript Pulumi program
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
