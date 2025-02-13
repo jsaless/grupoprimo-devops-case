@@ -10,7 +10,8 @@ Esse projeto tem como objetivo atender e responder os seguintes tópicos:
 
 ## Requisitos
 
-### Configuração Local
+<details>
+<summary>Configuração Local</summary>
 
 Para executar e desenvolver o projeto em sua máquina local, siga os passos abaixo:
 
@@ -45,10 +46,12 @@ Para executar e desenvolver o projeto em sua máquina local, siga os passos abai
             ```bash
             aws configure
             ```
-        - **Ou** definindo as seguintes variáveis de ambiente:
-            - `AWS_ACCESS_KEY_ID`
-            - `AWS_SECRET_ACCESS_KEY`
-            - `AWS_REGION` (ex.: `us-east-1`)
+        - Ou definindo as seguintes variáveis de ambiente no terminal:
+            ```bash
+            export AWS_ACCESS_KEY_ID=<access_key>
+            export AWS_SECRET_ACCESS_KEY=<secret_key>
+            export AWS_REGION=<region>
+            ```
 
 5. **Clonar o Repositório:**
     - Clone o projeto utilizando:
@@ -56,7 +59,10 @@ Para executar e desenvolver o projeto em sua máquina local, siga os passos abai
         git clone <url-do-repositório>
         ```
 
-### Configuração no GitHub
+</details/>
+
+<details>
+<summary>Configuração no GitHub</summary>
 
 Para que o pipeline de CI/CD funcione corretamente via GitHub Actions, é necessário configurar os seguintes segredos no repositório:
 
@@ -86,6 +92,8 @@ Para que o pipeline de CI/CD funcione corretamente via GitHub Actions, é necess
         - **Value:** _Token de acesso gerado no Pulumi Cloud_
 
 Após seguir estes passos, seu ambiente local estará preparado para desenvolver e testar o projeto, e o pipeline do GitHub Actions estará configurado para realizar deploys automatizados de forma segura.
+
+</details/>
 
 ## Arquitetura
 
