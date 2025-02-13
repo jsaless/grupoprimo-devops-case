@@ -1,0 +1,3 @@
+name: ecs-case
+description: A ECS stack to Grupo Primo's case
+runtime: nodejs

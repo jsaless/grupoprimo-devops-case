@@ -1,0 +1,15 @@
+config:
+    aws:region: us-east-1
+    aws:defaultTags:
+        tags:
+            iac: pulumi
+            owner: jsaless
+            project: ecs-case
+            repo: https://github.com/jsaless/grupoprimo-devops-case
+            stack: prod
+            tier: stack
+    ecs-case:dockerfileContext: ./app
+    ecs-case:containerCPU: 256
+    ecs-case:containerMemory: 1024
+    ecs-case:containerPort: 80
+    ecs-case:desiredCount: 3
