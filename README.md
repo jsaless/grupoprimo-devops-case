@@ -99,7 +99,7 @@ Após seguir estes passos, seu ambiente local estará preparado para desenvolver
 
 ### Diagrama
 
-> **Observação:** Insira aqui o diagrama da arquitetura que ilustra a interação entre os serviços e a estrutura de deploy.
+![Diagram](./assets/diagram.jpeg)
 
 ### Serviços
 
@@ -161,4 +161,4 @@ Para validar as práticas de segurança no pipeline, adotamos as seguintes medid
 ## Observações
 
 - Para esse projeto estamos utilizando o padrão de projetos [Builder](https://refactoring.guru/pt-br/design-patterns/builder), que nos permite abstrair toda a construção do recurso para o usuário, e deixar apenas os atributos que desejamos que sejam configurados.
-- Estamos utilizando a biblioteca `@pulumi/awsx` para simplificar a construção de uma infraestrutura ECS, onde é criado os Target Groups, a TaskExecution Role, Policies e etc... Tudo por baixo dos panos sem a gente se preocupar
+- Estamos utilizando a biblioteca `@pulumi/awsx` para simplificar a construção de uma infraestrutura ECS, onde é criado os Target Groups, a TaskExecution Role, Policies e etc... Sem ser necessário a criação explicita desses recursos.
