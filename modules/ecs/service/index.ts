@@ -1,15 +1,18 @@
 import { FargateService } from '@pulumi/awsx/ecs';
 import { IFargateService } from './interfaces';
 import { TargetGroup } from '@pulumi/aws/alb';
+import * as pulumi from '@pulumi/pulumi';
 
 export default class FargateServiceResource implements IFargateService {
     private name!: string;
 
-    private cluster!: string;
+    private cluster!: pulumi.Input<string> | pulumi.Output<string>;
+
+    private desiredCount!: number;
 
     private containerName!: string;
 
-    private containerImage!: string;
+    private containerImage!: pulumi.Input<string> | pulumi.Output<string>;
 
     private containerPort!: number;
 
@@ -19,7 +22,7 @@ export default class FargateServiceResource implements IFargateService {
 
     private memory!: number;
 
-    private targetGroup!: TargetGroup;
+    private targetGroup!: pulumi.Input<TargetGroup> | pulumi.Output<TargetGroup>;
 
     private awsComponent!: FargateService;
 
@@ -31,12 +34,20 @@ export default class FargateServiceResource implements IFargateService {
         return this.name;
     }
 
-    public setCluster(cluster: string): void {
+    public setCluster(cluster: pulumi.Input<string> | pulumi.Output<string>): void {
         this.cluster = cluster;
     }
 
-    public getCluster(): string {
+    public getCluster(): pulumi.Input<string> | pulumi.Output<string> {
         return this.cluster;
+    }
+
+    public setDesiredCount(desiredCount: number): void {
+        this.desiredCount = desiredCount;
+    }
+
+    public getDesiredCount(): number {
+        return this.desiredCount;
     }
 
     public setContainerName(name: string): void {
@@ -47,11 +58,11 @@ export default class FargateServiceResource implements IFargateService {
         return this.containerName;
     }
 
-    public setContainerImage(image: string): void {
+    public setContainerImage(image: pulumi.Input<string> | pulumi.Output<string>): void {
         this.containerImage = image;
     }
 
-    public getContainerImage(): string {
+    public getContainerImage(): pulumi.Input<string> | pulumi.Output<string> {
         return this.containerImage;
     }
 
@@ -87,11 +98,11 @@ export default class FargateServiceResource implements IFargateService {
         return this.memory;
     }
 
-    public setTargetGroup(targetGroup: TargetGroup): void {
+    public setTargetGroup(targetGroup: pulumi.Input<TargetGroup> | pulumi.Output<TargetGroup>): void {
         this.targetGroup = targetGroup;
     }
 
-    public getTargetGroup(): TargetGroup {
+    public getTargetGroup(): pulumi.Input<TargetGroup> | pulumi.Output<TargetGroup> {
         return this.targetGroup;
     }
 

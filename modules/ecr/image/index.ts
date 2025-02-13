@@ -1,5 +1,6 @@
 import { Image } from '@pulumi/awsx/ecr';
 import { IImage } from './interfaces';
+import * as pulumi from '@pulumi/pulumi';
 
 export default class ImageResource implements IImage {
     private name!: string;
@@ -8,7 +9,7 @@ export default class ImageResource implements IImage {
 
     private platform!: string;
 
-    private repositoryUrl!: string;
+    private repositoryUrl!: pulumi.Input<string> | pulumi.Output<string>;
 
     private awsComponent!: Image;
 
@@ -36,11 +37,11 @@ export default class ImageResource implements IImage {
         return this.platform;
     }
 
-    public setRepositoryUrl(url: string): void {
+    public setRepositoryUrl(url: pulumi.Input<string> | pulumi.Output<string>): void {
         this.repositoryUrl = url;
     }
 
-    public getRepositoryUrl(): string {
+    public getRepositoryUrl(): pulumi.Input<string> | pulumi.Output<string> {
         return this.repositoryUrl;
     }
 

@@ -1,6 +1,7 @@
 import ImageResource from '.';
 import { IImageBuilder } from './interfaces';
 import * as awsx from '@pulumi/awsx';
+import * as pulumi from '@pulumi/pulumi';
 
 export default class ImageBuilder implements IImageBuilder {
     private image = new ImageResource();
@@ -20,7 +21,7 @@ export default class ImageBuilder implements IImageBuilder {
         return this;
     }
 
-    public setRepositoryUrl(url: string): IImageBuilder {
+    public setRepositoryUrl(url: pulumi.Input<string> | pulumi.Output<string>): IImageBuilder {
         this.image.setRepositoryUrl(url);
         return this;
     }
