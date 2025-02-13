@@ -2,11 +2,90 @@
 
 Esse projeto tem como objetivo atender e responder os seguintes tópicos:
 
-- Como fez o IaC
-- Como criou os pipelines de CI/CD para automatizar o deploy seguro do app
-- Como faz o rollout sem o downtime
-- Como iria monitorar esse ambiente
-- Como iria validar práticas de segurança para implementar no pipeline
+- Como criar a IaC
+- Como criar os pipelines de CI/CD para automatizar o deploy seguro do app
+- Como realizar o rollout sem downtime
+- Como monitorar esse ambiente
+- Como validar práticas de segurança para implementar no pipeline
+
+## Requisitos
+
+### Configuração Local
+
+Para executar e desenvolver o projeto em sua máquina local, siga os passos abaixo:
+
+1. **Instalar Node.js:**
+
+    - Baixe e instale a versão LTS do [Node.js](https://nodejs.org/).
+    - Verifique a instalação executando no terminal:
+        ```bash
+        node -v
+        npm -v
+        ```
+
+2. **Instalar Pulumi CLI:**
+
+    - Siga as instruções na [documentação oficial do Pulumi](https://www.pulumi.com/docs/get-started/install/) para instalar o Pulumi CLI.
+    - Após a instalação, verifique a versão com:
+        ```bash
+        pulumi version
+        ```
+
+3. **Configurar Conta no Pulumi Cloud:**
+
+    - Crie uma conta em [Pulumi Cloud](https://app.pulumi.com/signup).
+    - Obtenha seu token de acesso (PULUMI_ACCESS_TOKEN) que será utilizado para autenticar a CLI com o Pulumi Cloud.
+
+4. **Configurar Conta na AWS:**
+
+    - Crie uma conta na [AWS](https://aws.amazon.com/).
+    - No console da AWS, acesse o IAM e gere as chaves de acesso (Access Key ID e Secret Access Key) para a criação e gerenciamento dos recursos.
+    - Configure as credenciais localmente:
+        - Usando o AWS CLI:
+            ```bash
+            aws configure
+            ```
+        - **Ou** definindo as seguintes variáveis de ambiente:
+            - `AWS_ACCESS_KEY_ID`
+            - `AWS_SECRET_ACCESS_KEY`
+            - `AWS_REGION` (ex.: `us-east-1`)
+
+5. **Clonar o Repositório:**
+    - Clone o projeto utilizando:
+        ```bash
+        git clone <url-do-repositório>
+        ```
+
+### Configuração no GitHub
+
+Para que o pipeline de CI/CD funcione corretamente via GitHub Actions, é necessário configurar os seguintes segredos no repositório:
+
+1. **AWS_ACCESS_KEY_ID:**
+
+    - Navegue até a página do repositório no GitHub.
+    - Acesse **Settings > Secrets and variables > Actions**.
+    - Clique em **New repository secret** e insira:
+        - **Name:** `AWS_ACCESS_KEY_ID`
+        - **Value:** _Sua chave de acesso AWS_
+
+2. **AWS_SECRET_ACCESS_KEY:**
+
+    - Crie um novo segredo com:
+        - **Name:** `AWS_SECRET_ACCESS_KEY`
+        - **Value:** _Sua chave secreta AWS_
+
+3. **AWS_REGION:**
+
+    - Crie um novo segredo com:
+        - **Name:** `AWS_REGION`
+        - **Value:** _Região da AWS desejada (ex.: `us-east-1`)_
+
+4. **PULUMI_ACCESS_TOKEN:**
+    - Crie um novo segredo com:
+        - **Name:** `PULUMI_ACCESS_TOKEN`
+        - **Value:** _Token de acesso gerado no Pulumi Cloud_
+
+Após seguir estes passos, seu ambiente local estará preparado para desenvolver e testar o projeto, e o pipeline do GitHub Actions estará configurado para realizar deploys automatizados de forma segura.
 
 ## Arquitetura
 
@@ -70,3 +149,8 @@ Para validar as práticas de segurança no pipeline, adotamos as seguintes medid
 - **Uso de GitHub Secrets:** As credenciais da AWS e do Pulumi são armazenadas de forma segura nos GitHub Secrets, evitando exposição de dados sensíveis.
 - **Autenticação Segura:** O pipeline utiliza essas credenciais para autenticar e interagir com a conta AWS, garantindo que somente operações autorizadas sejam realizadas.
 - **Validação Contínua:** Etapas de lint e outras verificações automatizadas ajudam a detectar vulnerabilidades ou códigos que não seguem as melhores práticas antes do deploy.
+
+## Observações
+
+- Para esse projeto estamos utilizando o padrão de projetos [Builder](https://refactoring.guru/pt-br/design-patterns/builder), que nos permite abstrair toda a construção do recurso para o usuário, e deixar apenas os atributos que desejamos que sejam configurados.
+- Estamos utilizando a biblioteca `@pulumi/awsx` para simplificar a construção de uma infraestrutura ECS, onde é criado os Target Groups, a TaskExecution Role, Policies e etc... Tudo por baixo dos panos sem a gente se preocupar
