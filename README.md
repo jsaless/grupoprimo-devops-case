@@ -162,3 +162,5 @@ Para validar as práticas de segurança no pipeline, adotamos as seguintes medid
 
 - Para esse projeto estamos utilizando o padrão de projetos [Builder](https://refactoring.guru/pt-br/design-patterns/builder), que nos permite abstrair toda a construção do recurso para o usuário, e deixar apenas os atributos que desejamos que sejam configurados.
 - Estamos utilizando a biblioteca `@pulumi/awsx` para simplificar a construção de uma infraestrutura ECS, onde é criado os Target Groups, a TaskExecution Role, Policies e etc... Sem ser necessário a criação explicita desses recursos.
+- Assim que a stack subir é possível consultar o URL do ALB utilizando o comando pulumi stack output url, e quando ser acessado deveria mostrar a seguinte tela:
+  ![application](./assets/application.png)
