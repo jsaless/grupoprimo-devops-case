@@ -17,7 +17,8 @@ export default class RepositoryBuilder implements IRepositoryBuilder {
 
     public build(): RepositoryResource {
         if (!this.repository.getAwsComponent()) {
-            const repository = new awsx.ecr.Repository('repo', {
+            const repository = new awsx.ecr.Repository(this.repository.getName(), {
+                name: this.repository.getName(),
                 forceDelete: true,
             });
 

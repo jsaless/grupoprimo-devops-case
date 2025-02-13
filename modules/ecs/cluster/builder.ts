@@ -12,7 +12,9 @@ export default class ClusterBuilder implements IClusterBuilder {
 
     public build(): ClusterResource {
         if (!this.cluster.getAwsComponent()) {
-            const cluster = new aws.ecs.Cluster('cluster');
+            const cluster = new aws.ecs.Cluster(this.cluster.getName(), {
+                name: this.cluster.getName(),
+            });
 
             this.cluster.setAwsComponent(cluster);
         }
