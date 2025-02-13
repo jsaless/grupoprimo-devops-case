@@ -133,12 +133,14 @@ O pipeline de CI/CD foi implementado com **GitHub Actions**, garantindo um deplo
 
 1. **Pipeline para Pull Requests:**
 
+    - Executado na stack de Dev
     - Realiza o login utilizando as credenciais da AWS.
     - Baixa as dependências do projeto.
     - Executa validações de lint no código.
     - Realiza uma pré-visualização (preview) das alterações que serão aplicadas na stack, permitindo identificar mudanças antes da aplicação.
 
 2. **Pipeline para Push na Branch Main:**
+    - Executado na stack de Prod
     - Executa as mesmas etapas de validação presentes no pipeline de PR.
     - Aplica efetivamente todas as alterações na stack, garantindo que o deploy seja seguro e consistente.
 
