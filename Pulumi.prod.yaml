@@ -6,10 +6,10 @@ config:
             owner: jsaless
             project: ecs-case
             repo: https://github.com/jsaless/grupoprimo-devops-case
-            stack: dev
+            stack: prod
             tier: stack
     ecs-case:dockerfileContext: ./app
-    ecs-case:containerCPU: 128
-    ecs-case:containerMemory: 512
+    ecs-case:containerCPU: 256
+    ecs-case:containerMemory: 1024
     ecs-case:containerPort: 80
-    ecs-case:desiredCount: 1
+    ecs-case:desiredCount: 3
